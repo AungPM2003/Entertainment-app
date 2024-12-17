@@ -3,67 +3,41 @@ import axios from "axios";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import Button from "../_components/Button";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+import AuthInput from "../_components/AuthInput";
 export default function SignupPage(){
-    const {
-        register,
-        formState:{errors},
-        handleSubmit
-    } = useForm();
+    const methods = useForm()
 
     async function onSignup(data:object){
+        console.log(data)
         try{
             const response = await axios.post('/api/users/signup',data)
         }catch(error){
-            console.log(error)
+            console.log(error.message)
         }
         
     };
 
     return(
-        <div className="flex flex-col min-h-screen items-center justify-center">
-            <div>
+        <div className="border-primary-red border-2 flex flex-col min-h-screen items-center justify-center">
+            <div className="mx-auto">
                 <span className="text-primary-red">X</span>
             </div>
 
-            <div className="bg-primary-semiDarkBlue w-[30%] p-8 rounded-lg flex flex-col gap-10">
+            <div className="bg-primary-semiDarkBlue p-8 rounded-lg flex flex-col gap-10 border-primary-red border-2 md:w-[30%]">
                 <h2>Sign Up</h2>
-                <form action="/login"  className="flex flex-col gap-y-6" onSubmit={handleSubmit(onSignup)}>
-                    <div className={`flex ${errors.email ? "border-primary-red": "border-primary-greyishBlue"} border-b-2 `}>
-                        <input className="bg-transparent px-4 pb-4 grow focus:outline-none" type="email"  placeholder="Email Address" {...register("email",{
-                        required:{
-                            value:true,
-                            message:"Can't be empty"
-                        }
-                        })}/>
-                        {errors.email && <p className="text-primary-red">{errors.email?.message}</p>}
-                    </div>
-                    <div className={`flex ${errors.password ? "border-primary-red": "border-primary-greyishBlue"} border-b-2 `}>
-                        <input className="bg-transparent px-4 pb-4 grow focus:outline-none" type="password"  placeholder="Password" {...register("password",{
-                        required:{
-                            value:true,
-                            message:"Can't be empty"
-                        }
-                        })}/>
-                        {errors.password && <p className="text-primary-red">{errors.password?.message}</p>}
-                    </div>
-                    <div className={`flex ${errors.repeatPassword ? "border-primary-red": "border-primary-greyishBlue"} border-b-2 `}>
-                        <input className="bg-transparent px-4 pb-4 grow focus:outline-none" type="password"  placeholder="Repeat Password" {...register("repeatPassword",{
-                        required:{
-                            value:true,
-                            message:"Can't be empty"
-                        }
-                        })}/>
-                        {errors.repeatPassword && <p className="text-primary-red">{errors.repeatPassword?.message}</p>}
-                    </div>
-                    
-                    
-                    <Button text="Create an account"/>
-                    <p className="text-center">Already have an account? <Link href={"/"}><span className="text-primary-red">Login</span></Link></p>
-                </form>                  
+                
+                <FormProvider {...methods}>
+                    <form className="flex flex-col gap-y-6" onSubmit={methods.handleSubmit(onSignup)}>
+                        <AuthInput type={"email"} placeholder={"Email"} name={"email"} />                  
+                        <AuthInput type={"password"} placeholder={"Password"}  name={"password"}/>
+                        <AuthInput type={"password"} placeholder={"Repeat Password"} name={"repeatPassword"}/>
+                        <Button text="Create an account"/>
+                        <p className="text-center">Already have an account? <Link href={"/"}><span className="text-primary-red">Login</span></Link></p>
+                    </form>                  
+                </FormProvider>
               
             </div>
         </div>
     )
 }
-

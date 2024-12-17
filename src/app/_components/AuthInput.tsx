@@ -1,12 +1,17 @@
 import React from 'react'
+import { useForm, useFormContext } from 'react-hook-form'
 
-export default function AuthInput({type,placeholder,name,register}) {
+export default function AuthInput({type,placeholder,name}) { 
+  const {register,formState:{errors}} = useFormContext()
   return (
-    <input className="bg-transparent px-4 pb-4 border-b-2 border-primary-greyishBlue" type={type}  placeholder={placeholder} {...register(name,{
-      required:{
-        value:true,
-        message:"Can't be empty"
-      }
-    })}/>
+    <div className={`flex ${errors[name] ? "border-primary-red": "border-primary-greyishBlue"} border-b-2 `}>
+      <input className="bg-transparent px-4 pb-4 grow focus:outline-none" type={type}  placeholder={placeholder} {...register(name,{
+            required:{
+                value:true,
+                message:"Can't be empty"
+            }
+      })}/>
+      {errors[name] && <p className="text-primary-red">{errors[name]?.message}</p>}
+    </div>
   )
 }
