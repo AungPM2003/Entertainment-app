@@ -19,12 +19,12 @@ export default function SignupPage(){
     };
 
     return(
-        <div className="border-primary-red border-2 flex flex-col min-h-screen items-center justify-center">
+        <div className="flex flex-col min-h-screen items-center justify-center">
             <div className="mx-auto">
                 <span className="text-primary-red">X</span>
             </div>
 
-            <div className="bg-primary-semiDarkBlue p-8 rounded-lg flex flex-col gap-10 border-primary-red border-2 md:w-[30%]">
+            <div className="bg-primary-semiDarkBlue p-8 rounded-lg flex flex-col gap-10 md:w-[40%] lg:w-[30%] text-xs md:text-base">
                 <h2>Sign Up</h2>
                 
                 <FormProvider {...methods}>
@@ -33,7 +33,7 @@ export default function SignupPage(){
                         <AuthInput type={"password"} placeholder={"Password"}  name={"password"}/>
                         <AuthInput type={"password"} placeholder={"Repeat Password"} name={"repeatPassword"}/>
                         <Button text="Create an account"/>
-                        <p className="text-center">Already have an account? <Link href={"/"}><span className="text-primary-red">Login</span></Link></p>
+                        <p className="text-center">Already have an account? <Link href={"/login"}><span className="text-primary-red">Login</span></Link></p>
                     </form>                  
                 </FormProvider>
               
