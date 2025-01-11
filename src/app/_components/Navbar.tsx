@@ -26,7 +26,7 @@ export default function Navbar() {
     const pathname = usePathname()
     if (pathname !== "/login" && pathname !== "/signup"){
         return (
-            <div className='min-h-screen lg:flex lg:py-5 md:p-3 justify-center '>
+            <div className='lg:min-h-screen lg:flex lg:py-5 md:p-3 justify-center'>
                 <div className='bg-primary-semiDarkBlue flex lg:flex-col content-between md:rounded-lg'>
                     <div className='lg:m-auto lg:p-5 my-auto ps-2'>
                         <MdMovie className='text-3xl text-primary-red'/>
