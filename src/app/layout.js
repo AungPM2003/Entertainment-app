@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="grid lg:grid-flow-col lg:grid-cols-[150px_minmax(900px,_1fr)]">
+        <div className="lg:grid lg:grid-flow-col lg:grid-cols-[150px_minmax(900px,_1fr)]">
           <Navbar/>
           <main>
             <div className="lg:pt-5">
