@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         <div className="grid lg:grid-flow-col lg:grid-cols-[150px_minmax(900px,_1fr)]">
           <Navbar/>
           <main>
-            <div className="lg:py-5">
+            <div className="lg:pt-5">
               <Searchbar/>
             </div>
             {children}
