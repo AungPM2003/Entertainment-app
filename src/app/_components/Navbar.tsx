@@ -20,7 +20,7 @@ const navIcons = [
     },{
         icon:<FaBookmark/>,
         link:"/bookmarks"
-    }
+    } 
 ]
 export default function Navbar() {
     const pathname = usePathname()
